@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.digital.v3.sql.mapper.ProductMapper">
+
+	<insert id="createProduct" parameterType="ProductVO">
+	    INSERT INTO product (productid, categoryid, productname, price, createdate, updatedate)
+	    VALUES (#{productId}, #{categoryVo.categoryId}, #{productName}, #{price}, SYSDATE, SYSDATE)
+	</insert>
+	
+	<select id="getProductByName" parameterType="string" resultType="ProductVO">
+		SELECT p.productid, p.productname, p.price,
+			c.categoryid AS "categoryVo.categoryid", c.categoryname AS "categoryVo.categoryname",
+			i.quantity
+		FROM product p
+			JOIN category c ON c.categoryid = p.categoryid
+			LEFT OUTER JOIN inventory i ON i.productid = p.productid
+		WHERE productname = #{productName}
+	</select>
+	
+	<select id="getProductByKeyword" parameterType="string" resultType="ProductVO">
+		SELECT p.productid, p.productname, p.price,
+			c.categoryid AS "categoryVo.categoryid", c.categoryname AS "categoryVo.categoryname",
+			i.quantity
+		FROM product p
+			JOIN category c ON c.categoryid = p.categoryid
+			LEFT OUTER JOIN inventory i ON i.productid = p.productid
+		WHERE INSTR(p.productname, #{keyword}) <![CDATA[>]]> 0
+	</select>
+	
+	<select id="getProductByCategory" parameterType="string" resultType="ProductVO">
+		SELECT p.productid, p.productname, p.price,
+			c.categoryid AS "categoryVo.categoryid", c.categoryname AS "categoryVo.categoryname",
+			i.quantity
+		FROM product p
+			JOIN category c ON c.categoryid = p.categoryid
+			LEFT OUTER JOIN inventory i ON i.productid = p.productid
+		WHERE categoryname = #{categoryName}
+	</select>
+	
+</mapper>

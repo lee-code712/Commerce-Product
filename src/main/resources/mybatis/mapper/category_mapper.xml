@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.digital.v3.sql.mapper.CategoryMapper">
+
+	<insert id="createCategory" parameterType="CategoryVO">
+	    INSERT INTO category (categoryid, categoryname, createdate, updatedate)
+	    VALUES (#{categoryId}, #{categoryName}, SYSDATE, SYSDATE)
+	</insert>
+	
+	<select id="getCategoryByName" parameterType="string" resultType="CategoryVO">
+		SELECT categoryid, categoryname
+		FROM category
+		WHERE categoryname = #{categoryName}
+	</select>
+	
+</mapper>
