@@ -26,9 +26,6 @@ spec:
       - image: 192.168.100.12/commerce-yr/commerce-yr-product-img:product-1
         imagePullPolicy: Always
         name: commerce-yr-product
-        ports:
-        - containerPort: 8080
-          protocol: TCP
         resources:
           limits:
             cpu: 200m
