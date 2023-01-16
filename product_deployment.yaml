@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   annotations:
     acornsoft.io/workload-group-no: "2"
-  generation: 3
+  generation: 1
   name: commerce-yr-product
   namespace: commerce-yr
 spec:
@@ -26,13 +26,6 @@ spec:
       - image: 192.168.100.12/commerce-yr/commerce-yr-product-img:product-1
         imagePullPolicy: Always
         name: commerce-yr-product
-        resources:
-          limits:
-            cpu: 200m
-            memory: "209715200"
-          requests:
-            cpu: 100m
-            memory: "104857600"
         securityContext:
           capabilities: {}
           privileged: false
@@ -43,7 +36,3 @@ spec:
       dnsPolicy: ClusterFirst
       imagePullSecrets:
       - name: commerce-cocktail-t8ceb0dry5v7
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
